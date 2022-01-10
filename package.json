@@ -1,14 +1,14 @@
 {
-  "name": "proxy",
-  "version": "1.0.0",
+  "name": "proxy-with-behavior",
+  "version": "0.1.0",
   "description": "Proxy developed to enable intercept request and change responses",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "José Moraes",
+  "license": "MIT",
   "dependencies": {
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
