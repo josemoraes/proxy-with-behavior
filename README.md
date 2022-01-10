@@ -111,6 +111,7 @@ Deletes a behavior by his ID and returns the updated list.
 
 ## Behavior types
 - `change-response`: Change the response (enables you to change status, or the data returned);
+- `latency`: Add latency to the request;
 
 ## What it does?
 - [x] Proxy requests to a service;
