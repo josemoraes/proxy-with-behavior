@@ -13,7 +13,7 @@ docker build -t proxy-with-behavior .
 
 docker run --rm -d -p 3000:3000 -p 3001:3001 -e "NODE_ENV=production" -e "SERVICE_URL=https://jsonplaceholder.typicode.com" --name proxy-with-behavior-container proxy-with-behavior
 ```
-If you want to apply this proxy, in front of your app, you just need to configure the network (or service) as a proxy. Consider that `SERVICE_URL` is a environment variable used to determine who is proxied service.
+If you want to apply this proxy, in front of your app, you just need to configure the network (or service) as a proxy. Consider that `SERVICE_URL` is a environment variable used to determine who is the proxied service.
 
 ### `GET` /behaviors
 
