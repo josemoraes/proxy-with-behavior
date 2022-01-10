@@ -1,6 +1,6 @@
 {
   "name": "proxy-with-behavior",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Proxy developed to enable intercept request and change responses",
   "main": "index.js",
   "scripts": {
