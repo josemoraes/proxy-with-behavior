@@ -1,6 +1,5 @@
-# Proxy Behavior
-Proxy Behavior is a node application that work as a reverse proxy, and enables apply some behaviors to be executed in requests.
-It's intended to help during Chaos Testing, allowing you to apply, for instance, a behavior that triggers 500 status exception.
+# Proxy with Behavior
+Proxy with Behavior is a node application that work as a reverse proxy, and enables apply some behaviors to be executed in requests.
 
 ## How to use the API?
 > The proxy API to handle with behaviors, usually uses port 3001.
@@ -30,6 +29,8 @@ List all stored behaviors
 			"status": 500,
 			"active": true,
 			"data": null,
+			"pattern_source":null,
+			"pattern_flag":null,
 			"createdAt": "2022-01-07T19:58:24.895Z",
 			"updatedAt": "2022-01-07T19:58:24.895Z"
 		},
@@ -41,6 +42,8 @@ List all stored behaviors
 			"status": 500,
 			"active": true,
 			"data": null,
+			"pattern_source":null,
+			"pattern_flag":null,
 			"createdAt": "2022-01-07T19:58:29.465Z",
 			"updatedAt": "2022-01-07T19:58:29.465Z"
 		}
@@ -52,28 +55,31 @@ List all stored behaviors
 
 Store behaviors and return the updated list. It's important to say that you can only associate a single behavior to a resource/method. This means, for instance, if you store a `change-response` behavior to the method/resource `GET /posts`, you can't store another behavior to the same method/resource, but if you want it, you can do this to another method of a resource (e.g. `latency` behavior applied to `POST /posts`).
 ```json
-# curl -X POST http://localhost:3001/behaviors -d '{"type": "change-response","resource": "/posts","method": "GET","status": 500 }'
+# curl -X POST http://localhost:3001/behaviors -d '{"type": "change-response","resource": "/posts","method": "GET","status": 500, "pattern": {"source": "see (chapter \\d+(\\.\\d)*)","flag": "i"} }'
 {
 	"behaviors": [
 		{
 			"id": 2,
 			"type": "change-response",
 			"resource": "/posts",
-			"method": "GET",
+			"method": "POST",
 			"status": 500,
 			"active": true,
 			"data": null,
-			"createdAt": "2022-01-07T19:58:29.465Z",
-			"updatedAt": "2022-01-07T19:58:29.465Z"
+			"pattern_source": "see (chapter \\d+(\\.\\d)*)",
+			"pattern_flag": "i",
+			"createdAt": "2022-01-11T01:33:37.187Z",
+			"updatedAt": "2022-01-11T01:33:37.187Z"
 		}
 	]
 }
 ```
 
-- **Required fields:** `type`, `resource`, `method`, and `status`
-- **Not required fields:** `active` and `data`;
+- **Required fields:** `type`, `resource`, and `method`
+- **Not required fields:** `status`, `pattern.source`, `pattern.flag`, `active` and `data`;
 
 > When you try latency behavior, use `data` field and consider this field as timeout in milliseconds value. This means if you use 'data': '5000', the behavior will apply a latency of 5 seconds before execute the request.
+> pattern.source and pattern.flag are used to define a regular expression that will verify where apply the behavior.
 
 ### `PUT` /behaviors/:id/toggle
 
@@ -84,15 +90,17 @@ Toggle behavior's active state.
 {
 	"behaviors": [
 		{
-			"id": 1,
+			"id": 2,
 			"type": "change-response",
 			"resource": "/posts",
-			"method": "GET",
+			"method": "POST",
 			"status": 500,
-			"active": false,
+			"active": true,
 			"data": null,
-			"createdAt": "2022-01-10T17:40:30.157Z",
-			"updatedAt": "2022-01-10T17:40:58.217Z"
+			"pattern_source": "see (chapter \\d+(\\.\\d)*)",
+			"pattern_flag": "i",
+			"createdAt": "2022-01-11T01:33:37.187Z",
+			"updatedAt": "2022-01-11T01:33:37.187Z"
 		}
 	]
 }
@@ -118,6 +126,7 @@ Deletes a behavior by his ID and returns the updated list.
 - [x] API to enable behavior's manipulation;
 - [x] Register of `change-response` behavior, enabling intercept and change status code's response;
 - [x] Register of `latency` behavior, enabling add latency in milliseconds;
+- [x] It's possible define a regular expression pattern, that will check if a behavior must be applied or not. If none pattern is defined, the behavior will be applied;
 - [x] Toggle of active behavior's state;
 ## What's next
 

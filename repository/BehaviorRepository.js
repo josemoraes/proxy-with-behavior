@@ -28,8 +28,10 @@ const BehaviorRepository = {
             resource: behavior.resource,
             type: behavior.type,
             method: behavior.method,
-            status: behavior.status || 0,
+            status: behavior.status,
             data: behavior.data,
+            pattern_source: behavior.pattern && behavior.pattern.source,
+            pattern_flag: behavior.pattern && behavior.pattern.flag,
             active: true
         });
     },

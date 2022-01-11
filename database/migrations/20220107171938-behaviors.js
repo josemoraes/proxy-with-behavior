@@ -21,15 +21,23 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      status: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
       active: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },
+      status: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
       data: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      pattern_source: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      pattern_flag: {
         type: Sequelize.STRING,
         allowNull: true,
       },

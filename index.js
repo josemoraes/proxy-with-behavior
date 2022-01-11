@@ -16,7 +16,6 @@ api.use(express.json());
 api.use(apiRoutes);
 proxy.use(morgan('dev'));
 
-
 proxy.use('', async (req, res, next) => {
     const resource = req.path;
     const method = req.method;
