@@ -9,6 +9,8 @@ class Behavior extends Model {
             status: DataTypes.INTEGER,
             active: DataTypes.BOOLEAN,
             data: DataTypes.STRING,
+            pattern_source: DataTypes.STRING,
+            pattern_flag: DataTypes.STRING
         }, {
             sequelize
         })
